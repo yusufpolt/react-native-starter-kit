@@ -1,0 +1,6 @@
+module Pods_StarterKitRN_StarterKitRNTests {
+  umbrella header "Pods-StarterKitRN-StarterKitRNTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
