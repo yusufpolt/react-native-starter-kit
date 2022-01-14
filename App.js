@@ -1,14 +1,24 @@
 import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
 import {Provider} from 'react-redux';
 import {store} from './src/appData';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Home from './src/screens/home';
+
+const Tabs = createBottomTabNavigator();
+
+const screenOptions = {
+  headerShown: false,
+};
 
 const App = () => {
   return (
     <Provider store={store}>
-      <SafeAreaView>
-        <Text>App Main</Text>
-      </SafeAreaView>
+      <NavigationContainer>
+        <Tabs.Navigator screenOptions={screenOptions}>
+          <Tabs.Screen name={'Home'} component={Home} />
+        </Tabs.Navigator>
+      </NavigationContainer>
     </Provider>
   );
 };

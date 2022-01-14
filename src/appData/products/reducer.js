@@ -1,13 +1,16 @@
-import {initialState, SET_ALL_PRODUCTS} from './constants';
+import {initialState, SET_ALL_PRODUCTS, SET_DETAIL_BY_ID} from './constants';
 
-const productsReducer = (state = initialState, action) => {
+const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_ALL_PRODUCTS:
       state.products = action.products;
       return {...state};
-    default:
+    case SET_DETAIL_BY_ID:
+      state.products.find(item => item.detailId === action.detailId);
       return {...state};
+    default:
+      return state;
   }
 };
 
-export default productsReducer;
+export default productReducer;

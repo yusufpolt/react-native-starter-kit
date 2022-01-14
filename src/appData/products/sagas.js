@@ -1,13 +1,16 @@
-import {getAllProduct} from '../../api/products';
+/************************* GET POPULAR MOVIES *************************/
 import {put, takeLeading} from '@redux-saga/core/effects';
-import {setAllProductsAction} from './actions';
-import {GET_ALL_PRODUCTS} from './constants';
+import {setAllProductsAction, setDetailByIdAction} from './actions';
+import {getAllProducts, getDetailById} from '../../api/products';
+import {GET_ALL_PRODUCTS, GET_DETAIL_BY_ID} from './constants';
 
-function* getAllProductsSaga() {
+/**************** GET ALL PRODUCT ****************/
+function* getAllProductsSaga(action) {
   try {
-    const {data: responseData} = yield getAllProduct();
+    const {data: responseData} = yield getAllProducts();
+
     yield put(setAllProductsAction(responseData));
-  } catch (e) {
+  } catch (err) {
     yield put(setAllProductsAction([]));
   }
 }
@@ -16,4 +19,22 @@ function* watchGetAllProductsSaga() {
   yield takeLeading(GET_ALL_PRODUCTS, getAllProductsSaga);
 }
 
-export const productsSaga = [watchGetAllProductsSaga()];
+/*************** GET DETAIL BY ID **************/
+
+function* getDetailByIdSaga(detailId) {
+  try {
+    const {data: responseData} = yield getDetailById;
+    yield put(setDetailByIdAction(responseData, detailId));
+  } catch (err) {
+    yield put(setDetailByIdAction([]));
+  }
+}
+
+function* watchGetDetailByIdSaga() {
+  yield takeLeading(GET_DETAIL_BY_ID, getDetailByIdSaga);
+}
+
+export const productsSaga = [
+  watchGetAllProductsSaga(),
+  watchGetDetailByIdSaga(),
+];

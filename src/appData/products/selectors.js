@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect';
 
-export const productsSelector = createSelector(
+export const productSelector = createSelector(
   state => state.products.products,
   state => state,
 );

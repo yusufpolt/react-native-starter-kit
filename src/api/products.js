@@ -1,5 +1,11 @@
 import axios from 'axios';
 
-export const getAllProduct = () => {
-  return axios.get('https://fakestoreapi.com/products');
+const GET_ALL_PRODUCTS_URL = 'https://fakestoreapi.com/products';
+
+export const getAllProducts = () => {
+  return axios.get(GET_ALL_PRODUCTS_URL);
+};
+
+export const getDetailById = detailId => {
+  return axios.get(`${GET_ALL_PRODUCTS_URL}/${detailId}`);
 };

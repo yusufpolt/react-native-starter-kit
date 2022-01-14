@@ -1,20 +1,19 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
-import productsReducer from './products/reducer';
+import productReducer from './products/reducer';
 import {all} from 'redux-saga/effects';
 import {productsSaga} from './products/sagas';
 import createSagaMiddleware from 'redux-saga';
 
-function* allSagas() {
+function* allSaga() {
   yield all([...productsSaga]);
 }
 
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware];
-
 const reducers = combineReducers({
-  products: productsReducer,
+  products: productReducer,
 });
 
 export const store = createStore(reducers, applyMiddleware(...middlewares));
 
-sagaMiddleware.run(allSagas);
+sagaMiddleware.run(allSaga);
