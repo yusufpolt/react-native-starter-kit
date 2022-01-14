@@ -1,5 +1,5 @@
 /************************* GET POPULAR MOVIES *************************/
-import {put, takeLeading} from '@redux-saga/core/effects';
+import {put, takeLeading, select} from '@redux-saga/core/effects';
 import {setAllProductsAction, setDetailByIdAction} from './actions';
 import {getAllProducts, getDetailById} from '../../api/products';
 import {GET_ALL_PRODUCTS, GET_DETAIL_BY_ID} from './constants';
@@ -7,6 +7,7 @@ import {GET_ALL_PRODUCTS, GET_DETAIL_BY_ID} from './constants';
 /**************** GET ALL PRODUCT ****************/
 function* getAllProductsSaga(action) {
   try {
+    const state = yield select();
     const {data: responseData} = yield getAllProducts();
 
     yield put(setAllProductsAction(responseData));
@@ -21,12 +22,15 @@ function* watchGetAllProductsSaga() {
 
 /*************** GET DETAIL BY ID **************/
 
-function* getDetailByIdSaga(detailId) {
+function* getDetailByIdSaga(action) {
   try {
-    const {data: responseData} = yield getDetailById;
-    yield put(setDetailByIdAction(responseData, detailId));
+    const {data: responseData} = yield getDetailById(action.id);
+    yield put(setDetailByIdAction(responseData));
+
+    action.onSuccess && action.onSuccess();
   } catch (err) {
     yield put(setDetailByIdAction([]));
+    action.onFailure && action.onFailure();
   }
 }
 

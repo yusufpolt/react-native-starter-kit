@@ -6,7 +6,7 @@ const productReducer = (state = initialState, action) => {
       state.products = action.products;
       return {...state};
     case SET_DETAIL_BY_ID:
-      state.products.find(item => item.detailId === action.detailId);
+      state.activeProduct = action.product;
       return {...state};
     default:
       return state;

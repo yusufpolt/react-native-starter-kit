@@ -6,4 +6,5 @@ export const SET_DETAIL_BY_ID = '@DETAIL_SET_DETAIL_BY_ID';
 
 export const initialState = {
   products: [],
+  activeProduct: {},
 };

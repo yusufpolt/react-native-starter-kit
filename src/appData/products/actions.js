@@ -2,6 +2,7 @@ import {
   GET_ALL_PRODUCTS,
   GET_DETAIL_BY_ID,
   SET_ALL_PRODUCTS,
+  SET_DETAIL_BY_ID,
 } from './constants';
 
 export const getAllProductsAction = () => {
@@ -17,15 +18,18 @@ export const setAllProductsAction = products => {
   };
 };
 
-export const getDetailByIdAction = () => {
+export const getDetailByIdAction = (id, onSuccess, onFailure) => {
   return {
     type: GET_DETAIL_BY_ID,
+    id,
+    onSuccess,
+    onFailure,
   };
 };
 
-export const setDetailByIdAction = detailId => {
+export const setDetailByIdAction = product => {
   return {
-    type: GET_DETAIL_BY_ID,
-    detailId,
+    type: SET_DETAIL_BY_ID,
+    product,
   };
 };

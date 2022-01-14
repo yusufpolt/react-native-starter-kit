@@ -1,16 +1,25 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './Details.style';
 import {Image, SafeAreaView, Text} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {getDetailByIdAction} from '../../appData/products/actions';
+import {activeProductSelector} from '../../appData/products/selectors';
 
 const Details = ({route}) => {
   const {id} = route.params;
-  console.log(id);
+  const dispatch = useDispatch();
+  const activeProduct = useSelector(activeProductSelector);
+
+  useEffect(() => {
+    dispatch(getDetailByIdAction(id));
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <Image source={null} style={styles.image} />
-      <Text style={styles.title}>title</Text>
-      <Text style={styles.desc}>desc</Text>
-      <Text style={styles.price}>price</Text>
+      <Text style={styles.title}>{activeProduct.title}</Text>
+      <Text style={styles.desc}>{activeProduct.description}</Text>
+      <Text style={styles.price}>{activeProduct.price}</Text>
     </SafeAreaView>
   );
 };
