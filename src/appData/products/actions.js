@@ -1,8 +1,11 @@
 import {
   GET_ALL_PRODUCTS,
   GET_DETAIL_BY_ID,
+  SAVE_PRODUCT,
+  SET_ACTIVE_PRODUCT,
   SET_ALL_PRODUCTS,
   SET_DETAIL_BY_ID,
+  SET_PRODUCT_COUNT,
 } from './constants';
 
 export const getAllProductsAction = () => {
@@ -24,6 +27,28 @@ export const getDetailByIdAction = (id, onSuccess, onFailure) => {
     id,
     onSuccess,
     onFailure,
+  };
+};
+
+export const setActiveProductAction = product => {
+  return {
+    type: SET_ACTIVE_PRODUCT,
+    product,
+  };
+};
+
+export const saveProductAction = product => {
+  return {
+    type: SAVE_PRODUCT,
+    product,
+  };
+};
+
+export const setProductCountAction = (index, value) => {
+  return {
+    type: SET_PRODUCT_COUNT,
+    index,
+    value,
   };
 };
 

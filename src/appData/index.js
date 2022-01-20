@@ -10,6 +10,12 @@ function* allSaga() {
 
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware];
+
+if (__DEV__) {
+  const createDebugger = require('redux-flipper').default;
+  middlewares.push(createDebugger());
+}
+
 const reducers = combineReducers({
   products: productReducer,
 });
